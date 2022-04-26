@@ -5,11 +5,11 @@ import cx from 'classnames';
 
 import styles from './Card.module.css';
 
-const Info = ({data: {Date, NewConfirmed, TotalConfirmed, TotalDeaths }}) => {
-  if (!NewConfirmed) {
+const Info = ({data:{Global}}) => {
+  console.log(Global);
+  if (typeof Global === 'undefined' ) {
     return 'Loading...';
   }
-
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -19,10 +19,10 @@ const Info = ({data: {Date, NewConfirmed, TotalConfirmed, TotalDeaths }}) => {
               Infected
             </Typography>
             <Typography variant="h5" component="h2">
-              <CountUp start={0} end={NewConfirmed} duration={2.75} separator="," />
+              <CountUp start={0} end={Global.NewConfirmed} duration={2.75} separator="," />
             </Typography>
             <Typography color="textSecondary">
-              Date : {Date.slice(0,10)}
+              Date : {Global.Date.slice(0,10)}
             </Typography>
             <Typography variant="body2" component="p">
               New Confirmed cases of COVID-19.
@@ -35,7 +35,7 @@ const Info = ({data: {Date, NewConfirmed, TotalConfirmed, TotalDeaths }}) => {
               Recovered
             </Typography>
             <Typography variant="h5" component="h2">
-              <CountUp start={0} end={TotalConfirmed} duration={2.75} separator="," />
+              <CountUp start={0} end={Global.TotalConfirmed} duration={2.75} separator="," />
             </Typography>
 
             <Typography variant="body2" component="p">
@@ -49,7 +49,7 @@ const Info = ({data: {Date, NewConfirmed, TotalConfirmed, TotalDeaths }}) => {
               Deaths
             </Typography>
             <Typography variant="h5" component="h2">
-              <CountUp start={0} end={TotalDeaths} duration={2.75} separator="," />
+              <CountUp start={0} end={Global.TotalDeaths} duration={2.75} separator="," />
             </Typography>
             <Typography variant="body2" component="p">
               Number of deaths caused by COVID-19.

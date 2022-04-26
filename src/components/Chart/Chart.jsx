@@ -1,49 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Line, Bar } from 'react-chartjs-2';
-
-import { fetchDailyData } from '../../api';
-
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as chartjs } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import styles from './Chart.module.css';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
 
-const Chart = ({ data, country }) => {
-  const [dailyData, setDailyData] = useState({});
-    console.log(data);
-//   useEffect(() => {
-//     const fetchMyAPI = async () => {
-//       const initialDailyData = await fetchDailyData();
+chartjs.register(ChartDataLabels);
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
-//       setDailyData(initialDailyData);
-//     };
+const BarChart = ({ data, country }) => {
+    if (typeof country === 'undefined' ) {
+        return 'Choose Country';
+    }
+    console.log(data,country);
+    if(!country)
+        country="India";
+    console.log(data.Countries);
+    const TotalConfirmed = data.Countries.find(x => x.Country === country).TotalConfirmed;
+    const NewConfirmed = data.Countries.find(x => x.Country === country).NewConfirmed;
+    const TotalDeaths = data.Countries.find(x => x.Country === country).TotalDeaths;
 
-//     fetchMyAPI();
-//   }, []);
-
-//   const barChart = (
-//     confirmed ? (
-//       <Bar
-//         data={{
-//           labels: ['Infected', 'Recovered', 'Deaths'],
-//           datasets: [
-//             {
-//               label: 'People',
-//               backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
-//               data: [confirmed.value, recovered.value, deaths.value],
-//             },
-//           ],
-//         }}
-//         options={{
-//           legend: { display: false },
-//           title: { display: true, text: `Current state in ${country}` },
-//         }}
-//       />
-//     ) : null
-//   );
+  const barChart = (
+    country ? (
+      <Bar
+        data={{
+          labels: ['TotalConfirmed', 'NewConfirmed', 'TotalDeaths'],
+          datasets: [
+            {
+              label: '',
+              backgroundColor: [ 'red', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+              data: [TotalConfirmed, NewConfirmed, TotalDeaths],
+            },
+          ],
+        }}
+      />
+    ) : null
+   );
 
   return (
     <div className={styles.container}>
-      {/* {barChart} */}
+      {barChart}
     </div>
   );
 };
 
-export default Chart;
+export default BarChart;
