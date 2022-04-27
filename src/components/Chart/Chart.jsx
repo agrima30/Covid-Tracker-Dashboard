@@ -27,10 +27,8 @@ const BarChart = ({ data, country }) => {
     if (typeof country === 'undefined' ) {
         return 'Choose Country';
     }
-    console.log(data,country);
     if(!country)
         country="India";
-    console.log(data.Countries);
     const TotalConfirmed = data.Countries.find(x => x.Country === country).TotalConfirmed;
     const NewConfirmed = data.Countries.find(x => x.Country === country).NewConfirmed;
     const TotalDeaths = data.Countries.find(x => x.Country === country).TotalDeaths;
@@ -43,11 +41,12 @@ const BarChart = ({ data, country }) => {
           datasets: [
             {
               label: '',
-              backgroundColor: [ 'red', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+              backgroundColor: [ 'rgba(255, 0, 0, 0.70)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 0, 0.30)'],
               data: [TotalConfirmed, NewConfirmed, TotalDeaths],
             },
           ],
         }}
+        
       />
     ) : null
    );

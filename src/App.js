@@ -4,7 +4,7 @@ import Chart from './components/Chart/Chart';
 import CountrySearch from './components/CountrySearch/CountrySearch';
 
 import styles from './App.module.css';
-import { fetchData, fetchGlobal } from './api';
+import { fetchData } from './api';
 
 class App extends React.Component {
 

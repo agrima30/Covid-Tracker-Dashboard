@@ -6,24 +6,22 @@ import cx from 'classnames';
 import styles from './Card.module.css';
 
 const Info = ({data:{Global}}) => {
-  console.log(Global);
   if (typeof Global === 'undefined' ) {
     return 'Loading...';
   }
   return (
     <div className={styles.container}>
+      <h2>Date : {Global.Date.slice(0,10)}</h2>
       <Grid container spacing={3} justify="center">
         <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.infected)}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Infected
+              New Confirmed
             </Typography>
             <Typography variant="h5" component="h2">
               <CountUp start={0} end={Global.NewConfirmed} duration={2.75} separator="," />
             </Typography>
-            <Typography color="textSecondary">
-              Date : {Global.Date.slice(0,10)}
-            </Typography>
+            
             <Typography variant="body2" component="p">
               New Confirmed cases of COVID-19.
             </Typography>
@@ -32,7 +30,7 @@ const Info = ({data:{Global}}) => {
         <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.recovered)}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
-              Recovered
+              Total Confirmed
             </Typography>
             <Typography variant="h5" component="h2">
               <CountUp start={0} end={Global.TotalConfirmed} duration={2.75} separator="," />
